@@ -1,10 +1,10 @@
-import { combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+// middleware (to manage asynchronous operations and side effects within your Redux-based applications.)
+import { thunk } from "redux-thunk";
 import accountReducer from "./features/accounts/accountSlice";
 import customerReducer from "./features/customers/customerSlice";
 
 /*
-  - PURE CODE (REDUX WITHOUT REACT), to understand REDUX in isolation.
-  - then we integrate the two together!
   - SECTION GOAL: is to model the bank account to be a bit simpler without an account number and onlu with a balance , ..
 */
 
@@ -22,6 +22,6 @@ const rootReducer = combineReducers({
   customer: customerReducer,
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;
