@@ -1,6 +1,5 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
-// middleware (to manage asynchronous operations and side effects within your Redux-based applications.)
-import { thunk } from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
+
 import accountReducer from "./features/accounts/accountSlice";
 import customerReducer from "./features/customers/customerSlice";
 
@@ -15,13 +14,12 @@ import customerReducer from "./features/customers/customerSlice";
   -one big difference between this reducer and the reducer in useReducer hook: usually we directly pass initialState as the default value
 */
 
-// REDUX
-// COMINED REDUCER/ ROOT RODUCER
-const rootReducer = combineReducers({
-  account: accountReducer,
-  customer: customerReducer,
+// REDUX TOOLKIT
+const store = configureStore({
+  reducer: {
+    account: accountReducer,
+    customer: customerReducer,
+  },
 });
-
-const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;
